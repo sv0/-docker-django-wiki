@@ -1,5 +1,5 @@
 """
-WSGI config for testproject project.
+WSGI config.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -28,7 +28,7 @@ PROJECT_PARENT = os.path.abspath(os.path.split(PROJECT_PATH)[0])
 sys.path.append(PROJECT_PATH)
 sys.path.append(PROJECT_PARENT)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "testproject.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wikiproject.settings")
 
 application = get_wsgi_application()
 
