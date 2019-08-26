@@ -38,7 +38,7 @@ develop: ## Setup development environment, install git hooks
 	chmod +x .git/hooks/pre-commit
 
 all: _download_tools ## Build all recent versions from github
-	./for-each-github-release-test --exec "make build push VERSION=%RELEASE_TAG%" --repo-name django-wiki/django-wiki --dest-docker-repo quay.io/riotkit/django-wiki --dont-rebuild --allowed-tags-regexp="releases/([0-9\.]+)$$" --release-tag-template="%MATCH_0%" --max-versions=5 --verbose
+	./.helpers/for-each-github-release --exec "make build push VERSION=%RELEASE_TAG%" --repo-name django-wiki/django-wiki --dest-docker-repo quay.io/riotkit/django-wiki --dont-rebuild --allowed-tags-regexp="releases/([0-9\.]+)$$" --release-tag-template="%MATCH_0%" --max-versions=5 --verbose
 
 _download_tools:
 	curl -s https://raw.githubusercontent.com/riotkit-org/ci-utils/${RIOTKIT_UTILS_VER}/bin/extract-envs-from-dockerfile > .helpers/extract-envs-from-dockerfile
