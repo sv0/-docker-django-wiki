@@ -2,7 +2,7 @@
 SUDO=sudo
 SHELL=/bin/bash
 .PHONY: help
-RIOTKIT_UTILS_VER=v1.2.0
+RIOTKIT_UTILS_VER=v1.2.1
 
 help:
 	@grep -E '^[a-zA-Z\-\_0-9\.@]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -37,7 +37,7 @@ develop: ## Setup development environment, install git hooks
 	echo "make before_commit" >> .git/hooks/pre-commit
 	chmod +x .git/hooks/pre-commit
 
-all:  ## Build all recent versions from github
+all: _download_tools ## Build all recent versions from github
 	./.helpers/for-each-github-release --exec "make build push VERSION=%RELEASE_TAG%" --repo-name django-wiki/django-wiki --dest-docker-repo quay.io/riotkit/django-wiki --dont-rebuild --allowed-tags-regexp="releases/([0-9\.]+)$$" --release-tag-template="%MATCH_0%" --max-versions=5 --verbose
 
 _download_tools:
