@@ -6,9 +6,7 @@ LABEL maintainer RiotKit <riotkit_org@riseup.net>
 
 ARG VERSION
 
-ENV \
-    # Administrative account login
-    ADMIN_USER=riotkit \
+ENV ADMIN_USER=riotkit \
     # Admin's password
     ADMIN_PASSWORD=capitalism-is-a-disaster-for-billions-of-people \
     # Admin's mail

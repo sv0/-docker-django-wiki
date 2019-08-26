@@ -1,39 +1,104 @@
-# docker-django-wiki
+RiotKit's docker container for Django Wiki
+==========================================
 
-Dockerfile and configuration files to create a simple [django-wiki](https://github.com/django-wiki/django-wiki) container.
-### Installation
-```sh
-$ sudo docker pull camandel/django-wiki
+###  Running
+
+```bash
+sudo docker run --name djangowiki_test --rm quay.io/riotkit/django-wiki:0.4.5
 ```
-### Usage
-```sh
-$ sudo docker run -d -P --name=django-wiki camandel/django-wiki
-$ sudo docker port django-wiki 8000
-0.0.0.0:49153
-$ wget http://localhost:49153 (admin/admin)
-```
-### Customization
-You can change configurations, templates and db:
-```sh
-$ git clone https://github.com/camandel/docker-django-wiki.git ~/src
-```
-Then copy the directories for what you need to modify and mount them as volumes:
-```sh
-$ cp -a ~/src/docker-django-wiki/testproject/testproject/{db,templates,settings} /mydata
-$ sudo docker run -d -P -v /mydata/db:/db:z -v /mydata/templates:/templates:z -v /mydata/settings:/settings:z --name=django-wiki camandel/django-wiki
-```
-SECRET_KEY is now in a separate file. If not present it will be generated:
-```sh
-cat /mydata/settings/secret_key.py
-SECRET_KEY='your-secret-key'
-```
-### Backup
-To backup the sqlite db copy it to a local directory or use a persistent volume:
-```sh
-$ sudo docker run -d -P -v /mydata/db:/db:z --name=django-wiki camandel/django-wiki
-$ echo '.dump' | sqlite3 /mydata/db/db.sqlite3 > /mydata/backup/wiki.dump
-```
-To restore:
-```sh
-$ sqlite3 /mydata/db/db.sqlite3 < /mydata/backup/wiki.dump
+
+Configuration reference
+-----------------------
+
+List of all environment variables that could be used.
+
+```yaml
+
+- ADMIN_USER # (example value: riotkit)
+
+# Admin's password
+- ADMIN_PASSWORD # (example value: capitalism-is-a-disaster-for-billions-of-people)
+
+# Admin's mail
+- ADMIN_EMAIL # (example value: admin@example.org)
+
+# Is this a PROD or DEV environment?
+- DEBUG # (example value: false)
+
+# Timezone
+- TZ # (example value: Europe/Warsaw)
+
+
+- USE_TZ # (example value: true)
+
+# Application language (see: http://www.i18nguy.com/unicode/language-identifiers.html)
+- LANGUAGE_CODE # (example value: en-US)
+
+
+- SITE_ID # (example value: 1)
+
+# Anonymous defaults
+- WIKI_ANONYMOUS_WRITE # (example value: true)
+
+# Anonymous defaults
+- WIKI_ANONYMOUS_CREATE # (example value: false)
+
+# Database type: mysql, sqlite3, postgresql, oracle
+- DB_TYPE # (example value: sqlite3)
+
+# Database name. For SQlite3 a filename, for others just a database name
+- DB_NAME # (example value: db.sqlite3)
+
+# Database user login
+- DB_USER # (example value: None)
+
+# Database user password
+- DB_PASSWORD # (example value: None)
+
+# Database host
+- DB_HOST # (example value: None)
+
+# Database port
+- DB_PORT # (example value: None)
+
+# Database charset
+- DB_CHARSET # (example value: None)
+
+# Database collation (MySQL only)
+- DB_COLLATION # (example value: None)
+
+
+- DB_ORA_DATAFILE # (example value: None)
+
+
+- DB_ORA_DATAFILE_TMP # (example value: None)
+
+
+- DB_ORA_DATAFILE_MAXSIZE # (example value: None)
+
+
+- DB_ORA_DATAFILE_TMP_MAXSIZE # (example value: None)
+
+
+- DB_ORA_DATAFILE_SIZE # (example value: None)
+
+# Should the application use cache?
+- USE_CACHE # (example value: false)
+
+
+- CACHE_LOCATION # (example value: /var/tmp/django_cache)
+
+
+- CACHE_KEY_PREFIX # (example value: )
+
+# The number of seconds before a cache entry is considered stale. If the value of this settings is None, cache entries will not expire.
+- CACHE_TIMEOUT # (example value: 300)
+
+# Default user who runs the project (id)
+- DJANGO_USER_ID # (example value: 1000)
+
+# Default group of a user that runs the project (gid)
+- DJANGO_GROUP_ID # (example value: 1000)
+
+
 ```
