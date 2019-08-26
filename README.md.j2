@@ -25,3 +25,29 @@ Volumes
 - /project/wikiproject/settings/secret_key
 - /project/wikiproject/media
 - /project/wikiproject/db (important if using SQLite3 database)
+
+Developing the container
+------------------------
+
+- The container is built on quay.io and hub.docker com
+- When you start working on it locally, at first run `make develop` to install git hooks
+- README.md is automatically generated from README.md.j2, do not edit the generated version!
+- Use `make` for building, pushing, etc.
+
+Releasing
+---------
+
+Just set a tag on git, the container will automatically be built on quay.io and on hub.docker.com
+
+Copyleft
+--------
+
+Created by **RiotKit Collective**, a libertarian, grassroot, non-profit organization providing technical support for the non-profit Anarchist movement.
+
+Check out those initiatives:
+- International Workers Association (https://iwa-ait.org)
+- Federacja Anarchistyczna (http://federacja-anarchistyczna.pl)
+- Związek Syndykalistów Polski (https://zsp.net.pl) (Polish section of IWA-AIT)
+- Komitet Obrony Praw Lokatorów (https://lokatorzy.info.pl)
+- Solidarity Federation (https://solfed.org.uk)
+- Priama Akcia (https://priamaakcia.sk)

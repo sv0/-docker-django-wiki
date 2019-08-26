@@ -1,3 +1,4 @@
 /project/wikiproject/db/db.sqlite3
 /.helpers/*
 !/.helpers/.gitkeep
+*.pyc
