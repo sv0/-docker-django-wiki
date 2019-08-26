@@ -2,7 +2,7 @@
 SUDO=sudo
 SHELL=/bin/bash
 .PHONY: help
-RIOTKIT_UTILS_VER=v1.2.1
+RIOTKIT_UTILS_VER=master
 
 help:
 	@grep -E '^[a-zA-Z\-\_0-9\.@]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
