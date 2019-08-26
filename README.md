@@ -85,7 +85,10 @@ List of all environment variables that could be used.
 # Should the application use cache?
 - USE_CACHE # (example value: false)
 
+# Cache type
+- CACHE_TYPE # (example value: filebased.FileBasedCache)
 
+# Cache specification/location
 - CACHE_LOCATION # (example value: /var/tmp/django_cache)
 
 

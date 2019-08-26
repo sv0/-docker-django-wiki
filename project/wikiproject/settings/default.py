@@ -143,7 +143,7 @@ DATABASES = {
 if get_bool_var('USE_CACHE', False):
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.filebased.' + get_env('CACHE_TYPE', 'FileBasedCache'),
+            'BACKEND': 'django.core.cache.backends.' + get_env('CACHE_TYPE', 'filebased.FileBasedCache'),
             'LOCATION': get_env('CACHE_LOCATION', '/var/tmp/django_cache'),
             'KEY_PREFIX': get_env('CACHE_KEY_PREFIX', ''),
             'TIMEOUT': int(get_env('CACHE_TIMEOUT', 300))

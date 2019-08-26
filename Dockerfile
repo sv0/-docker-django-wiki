@@ -46,6 +46,9 @@ ENV ADMIN_USER=riotkit \
     DB_ORA_DATAFILE_SIZE=None \
     # Should the application use cache?
     USE_CACHE=false \
+    # Cache type
+    CACHE_TYPE=filebased.FileBasedCache \
+    # Cache specification/location
     CACHE_LOCATION=/var/tmp/django_cache \
     CACHE_KEY_PREFIX= \
     # The number of seconds before a cache entry is considered stale. If the value of this settings is None, cache entries will not expire.
