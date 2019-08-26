@@ -47,7 +47,7 @@ try:
     from .secret_key import SECRET_KEY
 except ImportError:
     settings_dir = os.path.abspath(os.path.dirname(__file__))
-    generate_secret_key(os.path.join(PROJECT_DIR, 'settings', 'secret_key.py'))
+    generate_secret_key(os.path.join(PROJECT_DIR, 'settings', 'secret_key/__init__.py'))
     from .secret_key import SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!

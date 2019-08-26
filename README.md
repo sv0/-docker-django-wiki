@@ -105,3 +105,10 @@ List of all environment variables that could be used.
 
 
 ```
+
+Volumes
+-------
+
+- /project/wikiproject/settings/secret_key
+- /project/wikiproject/media
+- /project/wikiproject/db (important if using SQLite3 database)
