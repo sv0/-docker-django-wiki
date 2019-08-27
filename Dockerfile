@@ -60,7 +60,7 @@ ENV ADMIN_USER=riotkit \
 
 
 # Base
-RUN apk --update add python3 bash py3-pillow make shadow sudo \
+RUN apk --update add python3 bash py3-pillow make shadow sudo libpq \
     && rm -rf /var/cache/apk/* \
     && ([[ "$VERSION" == "master" ]] || pip3 --no-cache-dir install wiki==${VERSION}) \
     && ([[ "$VERSION" != "master" ]] || pip3 --no-cache-dir install --pre wiki) \
