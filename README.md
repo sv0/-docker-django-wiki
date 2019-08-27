@@ -1,6 +1,8 @@
 RiotKit's docker container for Django Wiki
 ==========================================
 
+[![Docker Repository on Quay](https://quay.io/repository/riotkit/django-wiki/status "Docker Repository on Quay")](https://quay.io/repository/riotkit/django-wiki)
+
 ###  Running
 
 ```bash
