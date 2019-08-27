@@ -68,7 +68,7 @@ RUN apk --update add python3 bash py3-pillow make shadow sudo \
     && ln -s /usr/bin/python3 /usr/bin/python
 
 # PostgreSQL support
-RUN apk add --update--virtual .build-deps gcc musl-dev python3-dev postgresql-dev \
+RUN apk add --update --virtual .build-deps gcc musl-dev python3-dev postgresql-dev \
     && rm -rf /var/cache/apk/* \
     && pip3 --no-cache-dir install psycopg2 \
     && apk --purge del .build-deps
