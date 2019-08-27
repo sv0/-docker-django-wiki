@@ -2,3 +2,4 @@
 /.helpers/*
 !/.helpers/.gitkeep
 *.pyc
+!/project/wikiproject/media/wiki/riotkit/css/style.css
