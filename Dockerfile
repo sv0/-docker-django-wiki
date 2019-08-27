@@ -77,11 +77,13 @@ ADD ./project /project
 ADD ./Makefile /project/
 
 # - Migrate the database initially (if will be using SQLite3)
+# - Copy static files from Python module to our project
 # - Add target user
 # - For security delete the key generated during the build
 RUN mkdir -p /var/tmp/django_cache \
     && cd /project \
     && ./manage.py migrate \
+    && ./manage.py collectstatic \
     && addgroup -g 1000 django \
     && adduser -S -D -u 1000 django -G django \
     && rm /project/wikiproject/settings/secret_key/* -rf

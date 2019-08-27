@@ -150,8 +150,6 @@ DATABASES = {
     }
 }
 
-print(' >> Initializing DB: ' + str(DATABASES))
-
 if get_bool_var('USE_CACHE', False):
     CACHES = {
         'default': {
@@ -203,6 +201,10 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
+
+print(' >> PROJECT_DIR = %s' % PROJECT_DIR)
+print(' >> STATIC_ROOT = %s' % STATIC_ROOT)
+print(' >> MEDIA_ROOT = %s' % MEDIA_ROOT)
 
 WIKI_ANONYMOUS_WRITE = get_bool_var('WIKI_ANONYMOUS_WRITE', True)
 WIKI_ANONYMOUS_CREATE = get_bool_var('WIKI_ANONYMOUS_CREATE', False)
