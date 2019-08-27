@@ -40,7 +40,8 @@ Developing the container
 Releasing
 ---------
 
-Just set a tag on git, the container will automatically be built on quay.io and on hub.docker.com
+On Travis CI the build is triggered each month, then all recent versions of Django Wiki are built. Already existing docker tags are not overwritten.
+The build is also triggered on-commit. Snapshot version is made from master branch, and is always a latest master, can be unstable.
 
 Copyleft
 --------

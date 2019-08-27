@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 from __future__ import unicode_literals
 
 import os
+import sys
 
 from django.urls import reverse_lazy
 from django.utils.crypto import get_random_string
@@ -39,6 +40,11 @@ def get_env(var: str, default):
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+settings_dir = os.path.abspath(os.path.dirname(__file__))
+generate_secret_key(os.path.join(PROJECT_DIR, 'settings/secret_key/', '__init__.py'))
+sys.path.append(settings_dir)
+sys.path.append(settings_dir + '/../../')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -46,8 +52,6 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 try:
     from .secret_key import SECRET_KEY
 except ImportError:
-    settings_dir = os.path.abspath(os.path.dirname(__file__))
-    generate_secret_key(os.path.join(PROJECT_DIR, 'settings', 'secret_key/__init__.py'))
     from .secret_key import SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!

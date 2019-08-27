@@ -59,21 +59,28 @@ ENV ADMIN_USER=riotkit \
     DJANGO_GROUP_ID=1000
 
 
+RUN apk --update add python3 bash py3-pillow make shadow sudo \
+    && rm -rf /var/cache/apk/* \
+    && ([[ "$VERSION" == "master" ]] || pip3 --no-cache-dir install wiki==${VERSION}) \
+    && ([[ "$VERSION" != "master" ]] || pip3 --no-cache-dir install --pre wiki) \
+    && pip3 --no-cache-dir install gunicorn \
+    && ln -s /usr/bin/python3 /usr/bin/python
+
 ADD ./project /project
 ADD ./Makefile /project/
 
-RUN apk --update add python3 bash py3-pillow make shadow sudo \
-    && rm -rf /var/cache/apk/* \
-    && pip3 --no-cache-dir install wiki==${VERSION} gunicorn \
-    && ln -s /usr/bin/python3 /usr/bin/python \
-    \
+RUN \
     # Test migrations, create an initial database in SQLite3
     \
-    && mkdir -p /var/tmp/django_cache \
+    mkdir -p /var/tmp/django_cache \
     && cd /project \
     && ./manage.py migrate \
     && addgroup -g 1000 django \
-    && adduser -S -D -u 1000 django -G django
+    && adduser -S -D -u 1000 django -G django \
+    \
+    # For security delete the key generated during the build
+    \
+    && rm /project/wikiproject/settings/secret_key/* -rf
 
 ADD ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh

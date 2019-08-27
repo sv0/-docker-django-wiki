@@ -10,13 +10,13 @@ help:
 build: ## Build the image (VERSION)
 	[[ "${VERSION}" ]] || (echo "VERSION param is required" && exit 1)
 	echo " >> Building ${VERSION}"
-	${SUDO} docker build --build-arg VERSION=${VERSION} . -f ./Dockerfile -t quay.io/riotkit/django-wiki:${VERSION}
+	${SUDO} docker build --build-arg VERSION=${VERSION} . -f ./Dockerfile -t quay.io/riotkit/django-wiki:${TAG}
 
 build_snapshot: ## Build current snapshot
-	make build VERSION=master
+	make build VERSION=master TAG=dev-snapshot
 
 push: ## Push to the registry
-	${SUDO} docker push quay.io/riotkit/django-wiki:${VERSION}
+	${SUDO} docker push quay.io/riotkit/django-wiki:${TAG}
 
 run: ## Run a test instance (VERSION)
 	${SUDO} docker run --name djangowiki_test --rm quay.io/riotkit/django-wiki:${VERSION}
@@ -38,7 +38,8 @@ develop: ## Setup development environment, install git hooks
 	chmod +x .git/hooks/pre-commit
 
 all: _download_tools ## Build all recent versions from github
-	./.helpers/for-each-github-release --exec "make build push VERSION=%RELEASE_TAG%" --repo-name django-wiki/django-wiki --dest-docker-repo quay.io/riotkit/django-wiki --dont-rebuild --allowed-tags-regexp="releases/([0-9\.]+)$$" --release-tag-template="%MATCH_0%" --max-versions=5 --verbose
+	./.helpers/for-each-github-release --exec "make build push VERSION=%RELEASE_TAG% TAG=%RELEASE_TAG%" --repo-name django-wiki/django-wiki --dest-docker-repo quay.io/riotkit/django-wiki --dont-rebuild --allowed-tags-regexp="releases/([0-9\.]+)$$" --release-tag-template="%MATCH_0%" --max-versions=5 --verbose
+	make build_snapshot
 
 _download_tools:
 	curl -s https://raw.githubusercontent.com/riotkit-org/ci-utils/${RIOTKIT_UTILS_VER}/bin/extract-envs-from-dockerfile > .helpers/extract-envs-from-dockerfile
