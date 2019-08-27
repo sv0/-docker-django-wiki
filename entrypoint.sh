@@ -3,7 +3,7 @@
 set -e
 
 create_user () {
-    out=$(echo "from django.contrib.auth.models import User; User.objects.create_superuser(username='${1}', password='${2}', email='${3}')" | sudo -u django bash -c "cd /project && ./manage.py shell")
+    out=$(echo "from django.contrib.auth.models import User; User.objects.create_superuser(username='${1}', password='${2}', email='${3}')" | sudo -E -u django bash -c "cd /project && ./manage.py shell")
     result=$?
 
     if [[ "$out" == *"UNIQUE constraint failed"* ]]; then
@@ -29,7 +29,7 @@ prepare_permissions () {
 
 prepare_app () {
     echo " >> Performing migrations"
-    sudo -u django bash -c "cd /project && ./manage.py migrate"
+    sudo -E -u django bash -c "cd /project && ./manage.py migrate"
 }
 
 echo "# ==================================================================================="
@@ -47,4 +47,4 @@ prepare_permissions
 prepare_app
 create_user "$ADMIN_USER" "$ADMIN_PASSWORD" "$ADMIN_EMAIL"
 
-exec sudo -u django bash -c "cd /project && gunicorn -b 0.0.0.0:8000 wikiproject.wsgi"
+exec sudo -E -u django bash -c "cd /project && gunicorn -b 0.0.0.0:8000 wikiproject.wsgi"

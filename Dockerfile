@@ -83,7 +83,7 @@ ADD ./Makefile /project/
 RUN mkdir -p /var/tmp/django_cache \
     && cd /project \
     && ./manage.py migrate \
-    && ./manage.py collectstatic \
+    && ./manage.py collectstatic --no-input \
     && addgroup -g 1000 django \
     && adduser -S -D -u 1000 django -G django \
     && rm /project/wikiproject/settings/secret_key/* -rf

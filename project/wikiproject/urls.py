@@ -18,6 +18,9 @@ if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
 
 urlpatterns += [
+    url(r'^static/wiki/markitup/sets/frontend/style.css/images/(?P<path>.*)$', static_serve,
+        {'document_root': settings.STATIC_ROOT + '/wiki/markitup/sets/frontend/images'}
+    ),
     url(r'^static/(?P<path>.*)$', static_serve, {'document_root': settings.STATIC_ROOT}),
     url(r'^media/(?P<path>.*)$', static_serve, {'document_root': settings.MEDIA_ROOT}),
 ]

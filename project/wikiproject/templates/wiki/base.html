@@ -1,7 +1,22 @@
 {% extends "wiki/base_site.html" %}
+{% load i18n %}
 
 {% block wiki_site_title %} - Wiki{% endblock %}
 
 {% block wiki_header_branding %}
 <a class="navbar-brand" href="/">WIKI</a>
+{% endblock %}
+
+{% block wiki_header_navlinks %}
+    <ul class="nav navbar-nav">
+        <li class="active"><a href="/">{% trans "Home" %}</a></li>
+    </ul>
+{% endblock %}
+
+{% block wiki_footer_prepend %}
+<p>
+    Deployed using <a href="https://riotkit.org" target="_blank">RiotKit</a>'s open source <a href="https://github.com/riotkit-org/docker-django-wiki" target="_blank">container</a>,
+    created in first place for grassroot, non-profit organizations such as <a href="https://iwa-ait.org" target="_blank">iwa-ait</a>
+</p>
+<link href="/media/wiki/riotkit/css/style.css" rel="stylesheet">
 {% endblock %}

@@ -25,7 +25,7 @@ def generate_secret_key(filename):
 
 
 def get_bool_var(var: str, default: bool) -> bool:
-    return os.getenv(var, str(default)).lower() == 'true'
+    return os.getenv(var, str(default)).strip().lower() == 'true'
 
 
 def get_env(var: str, default):
@@ -56,6 +56,8 @@ except ImportError:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = get_bool_var('DEBUG', False)
+
+print(' >> Debug is %s' % str(DEBUG))
 
 ALLOWED_HOSTS = ['*']
 

@@ -1,7 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponseServerError
 from django.template import loader
-from django.template import Context
 from django.views.decorators.csrf import requires_csrf_token
 from django.template.backends.django import Template
 

@@ -19,7 +19,7 @@ push: ## Push to the registry
 	${SUDO} docker push quay.io/riotkit/django-wiki:${TAG}
 
 run: ## Run a test instance (VERSION)
-	${SUDO} docker run --name djangowiki_test -p 8000:8000  --rm quay.io/riotkit/django-wiki:${VERSION}
+	${SUDO} docker run --name djangowiki_test -p 8000:8000 -e DEBUG=true --rm quay.io/riotkit/django-wiki:${VERSION}
 
 
 ### COMMON AUTOMATION
