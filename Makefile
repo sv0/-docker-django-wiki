@@ -38,9 +38,9 @@ develop: ## Setup development environment, install git hooks
 	chmod +x .git/hooks/pre-commit
 
 all: _download_tools ## Build all recent versions from github
-	BUILD_PARAMS="--no-rebuild'; \
-	if [[ "$$TRAVIS_COMMIT_MESSAGE == *"@force-rebuild"* ]]; then \
-		BUILD__PARAMS=""; \
+	BUILD_PARAMS="--dont-rebuild "; \
+	if [[ "$$TRAVIS_COMMIT_MESSAGE" == *"@force-rebuild"* ]]; then \
+		BUILD_PARAMS=" "; \
 	fi; \
 	./.helpers/for-each-github-release --exec "make build push VERSION=%RELEASE_TAG% TAG=%RELEASE_TAG%" --repo-name django-wiki/django-wiki --dest-docker-repo quay.io/riotkit/django-wiki $${BUILD_PARAMS}--allowed-tags-regexp="releases/([0-9\.]+)$$" --release-tag-template="%MATCH_0%" --max-versions=5 --verbose
 	make build_snapshot
