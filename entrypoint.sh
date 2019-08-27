@@ -3,10 +3,10 @@
 set -e
 
 create_user () {
-    out=$(echo "from django.contrib.auth.models import User; User.objects.create_superuser(username='${1}', password='${2}', email='${3}')" | sudo -E -u django bash -c "cd /project && ./manage.py shell")
+    out=$(echo "from django.contrib.auth.models import User; User.objects.create_superuser(username='${1}', password='${2}', email='${3}')" | sudo -E -u django bash -c "cd /project && ./manage.py shell" || true)
     result=$?
 
-    if [[ "$out" == *"IntegrityError"* ]]; then
+    if [[ "$out" == *"IntegrityError"* ]] || [[ "$out" == *"UNIQUE constraint failed"* ]]; then
         return 0
     fi
 
