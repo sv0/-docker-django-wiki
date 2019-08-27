@@ -123,13 +123,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'wikiproject.wsgi.application'
 LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
 
+if os.getenv('DB_TYPE') == 'sqlite3':
+    DB_NAME = os.path.join(PROJECT_DIR, 'db', os.getenv('DB_NAME', 'db.sqlite3'))
+else:
+    DB_NAME = os.getenv('DB_NAME', 'riotkit_django_wiki'),
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.' + os.getenv('DB_TYPE', 'sqlite3'),
-        'NAME': os.path.join(PROJECT_DIR, 'db', os.getenv('DB_NAME', 'db.sqlite3')) if os.getenv('DB_TYPE') == 'sqlite3' else os.getenv('DB_NAME', 'riotkit_django_wiki'),
+        'NAME':  DB_NAME,
         'USER': get_env('DB_USER', None),
         'PASSWORD': get_env('DB_PASSWORD', None),
         'HOST': get_env('DB_HOST', None),
