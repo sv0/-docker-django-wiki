@@ -59,12 +59,19 @@ ENV ADMIN_USER=riotkit \
     DJANGO_GROUP_ID=1000
 
 
+# Base
 RUN apk --update add python3 bash py3-pillow make shadow sudo \
     && rm -rf /var/cache/apk/* \
     && ([[ "$VERSION" == "master" ]] || pip3 --no-cache-dir install wiki==${VERSION}) \
     && ([[ "$VERSION" != "master" ]] || pip3 --no-cache-dir install --pre wiki) \
     && pip3 --no-cache-dir install gunicorn \
     && ln -s /usr/bin/python3 /usr/bin/python
+
+# PostgreSQL support
+RUN apk add --update--virtual .build-deps gcc musl-dev python3-dev postgresql-dev \
+    && rm -rf /var/cache/apk/* \
+    && pip3 --no-cache-dir install psycopg2 \
+    && apk --purge del .build-deps
 
 ADD ./project /project
 ADD ./Makefile /project/
