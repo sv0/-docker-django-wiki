@@ -24,7 +24,7 @@ prepare_permissions () {
     groupmod -g "$DJANGO_GROUP_ID" django
 
     echo " >> Correcting permissions"
-    chown django:django -R /project/wikiproject/db /project/wikiproject/media
+    chown django:django -R /project/wikiproject/db /project/wikiproject/media /project/wikiproject/settings/secret_key
 }
 
 prepare_app () {
