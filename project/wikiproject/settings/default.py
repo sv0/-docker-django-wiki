@@ -126,7 +126,7 @@ LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
 if os.getenv('DB_TYPE') == 'sqlite3':
     DB_NAME = os.path.join(PROJECT_DIR, 'db', os.getenv('DB_NAME', 'db.sqlite3'))
 else:
-    DB_NAME = os.getenv('DB_NAME', 'riotkit_django_wiki'),
+    DB_NAME = os.getenv('DB_NAME', 'riotkit_django_wiki')
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
