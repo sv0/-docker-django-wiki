@@ -69,17 +69,14 @@ RUN apk --update add python3 bash py3-pillow make shadow sudo \
 ADD ./project /project
 ADD ./Makefile /project/
 
-RUN \
-    # Test migrations, create an initial database in SQLite3
-    \
-    mkdir -p /var/tmp/django_cache \
+# - Migrate the database initially (if will be using SQLite3)
+# - Add target user
+# - For security delete the key generated during the build
+RUN mkdir -p /var/tmp/django_cache \
     && cd /project \
     && ./manage.py migrate \
     && addgroup -g 1000 django \
     && adduser -S -D -u 1000 django -G django \
-    \
-    # For security delete the key generated during the build
-    \
     && rm /project/wikiproject/settings/secret_key/* -rf
 
 ADD ./entrypoint.sh /
