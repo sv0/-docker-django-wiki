@@ -17,94 +17,94 @@ List of all environment variables that could be used.
 
 ```yaml
 
-- ADMIN_USER # (example value: riotkit)
+- ADMIN_USER # (default: riotkit)
 
 # Admin's password
-- ADMIN_PASSWORD # (example value: capitalism-is-a-disaster-for-billions-of-people)
+- ADMIN_PASSWORD # (default: capitalism-is-a-disaster-for-billions-of-people)
 
 # Admin's mail
-- ADMIN_EMAIL # (example value: admin@example.org)
+- ADMIN_EMAIL # (default: admin@example.org)
 
 # Is this a PROD or DEV environment?
-- DEBUG # (example value: false)
+- DEBUG # (default: false)
 
 # Timezone
-- TZ # (example value: Europe/Warsaw)
+- TZ # (default: Europe/Warsaw)
 
 
-- USE_TZ # (example value: true)
+- USE_TZ # (default: true)
 
 # Application language (see: http://www.i18nguy.com/unicode/language-identifiers.html)
-- LANGUAGE_CODE # (example value: en-US)
+- LANGUAGE_CODE # (default: en-US)
 
 
-- SITE_ID # (example value: 1)
-
-# Anonymous defaults
-- WIKI_ANONYMOUS_WRITE # (example value: true)
+- SITE_ID # (default: 1)
 
 # Anonymous defaults
-- WIKI_ANONYMOUS_CREATE # (example value: false)
+- WIKI_ANONYMOUS_WRITE # (default: true)
+
+# Anonymous defaults
+- WIKI_ANONYMOUS_CREATE # (default: false)
 
 # Database type: mysql, sqlite3, postgresql, oracle
-- DB_TYPE # (example value: sqlite3)
+- DB_TYPE # (default: sqlite3)
 
 # Database name. For SQlite3 a filename, for others just a database name
-- DB_NAME # (example value: db.sqlite3)
+- DB_NAME # (default: db.sqlite3)
 
 # Database user login
-- DB_USER # (example value: None)
+- DB_USER # (default: None)
 
 # Database user password
-- DB_PASSWORD # (example value: None)
+- DB_PASSWORD # (default: None)
 
 # Database host
-- DB_HOST # (example value: None)
+- DB_HOST # (default: None)
 
 # Database port
-- DB_PORT # (example value: None)
+- DB_PORT # (default: None)
 
 # Database charset
-- DB_CHARSET # (example value: None)
+- DB_CHARSET # (default: None)
 
 # Database collation (MySQL only)
-- DB_COLLATION # (example value: None)
+- DB_COLLATION # (default: None)
 
 
-- DB_ORA_DATAFILE # (example value: None)
+- DB_ORA_DATAFILE # (default: None)
 
 
-- DB_ORA_DATAFILE_TMP # (example value: None)
+- DB_ORA_DATAFILE_TMP # (default: None)
 
 
-- DB_ORA_DATAFILE_MAXSIZE # (example value: None)
+- DB_ORA_DATAFILE_MAXSIZE # (default: None)
 
 
-- DB_ORA_DATAFILE_TMP_MAXSIZE # (example value: None)
+- DB_ORA_DATAFILE_TMP_MAXSIZE # (default: None)
 
 
-- DB_ORA_DATAFILE_SIZE # (example value: None)
+- DB_ORA_DATAFILE_SIZE # (default: None)
 
 # Should the application use cache?
-- USE_CACHE # (example value: false)
+- USE_CACHE # (default: false)
 
 # Cache type
-- CACHE_TYPE # (example value: filebased.FileBasedCache)
+- CACHE_TYPE # (default: filebased.FileBasedCache)
 
 # Cache specification/location
-- CACHE_LOCATION # (example value: /var/tmp/django_cache)
+- CACHE_LOCATION # (default: /var/tmp/django_cache)
 
 
-- CACHE_KEY_PREFIX # (example value: )
+- CACHE_KEY_PREFIX # (default: )
 
 # The number of seconds before a cache entry is considered stale. If the value of this settings is None, cache entries will not expire.
-- CACHE_TIMEOUT # (example value: 300)
+- CACHE_TIMEOUT # (default: 300)
 
 # Default user who runs the project (id)
-- DJANGO_USER_ID # (example value: 1000)
+- DJANGO_USER_ID # (default: 1000)
 
 # Default group of a user that runs the project (gid)
-- DJANGO_GROUP_ID # (example value: 1000)
+- DJANGO_GROUP_ID # (default: 1000)
 
 
 ```
