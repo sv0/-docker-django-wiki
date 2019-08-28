@@ -130,6 +130,8 @@ Releasing
 On Travis CI the build is triggered each month, then all recent versions of Django Wiki are built. Already existing docker tags are not overwritten.
 The build is also triggered on-commit. Snapshot version is made from master branch, and is always a latest master, can be unstable.
 
+To release a bugfix version and REBUILD EXISTING TAGS just add "@force-rebuild" in commit message, recent 5 tags will be rebuilt (not all in registry).
+
 Copyleft
 --------
 
