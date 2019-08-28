@@ -204,6 +204,8 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 MEDIA_URL = '/media/'
 
+THEME_ROOT = os.path.join(PROJECT_DIR, 'theme')
+
 print(' >> PROJECT_DIR = %s' % PROJECT_DIR)
 print(' >> STATIC_ROOT = %s' % STATIC_ROOT)
 print(' >> MEDIA_ROOT = %s' % MEDIA_ROOT)
