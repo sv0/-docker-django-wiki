@@ -25,6 +25,12 @@ prepare_permissions () {
 
     echo " >> Correcting permissions"
     chown django:django -R /project/wikiproject/db /project/wikiproject/media /project/wikiproject/settings/secret_key
+
+    if [[ "$CACHE_TYPE" == "filebased.FileBasedCache" ]]; then
+        echo " >> Creating $CACHE_LOCATION and setting correct permissions"
+        mkdir -p "$CACHE_LOCATION"
+        chown django:django -R "$CACHE_LOCATION"
+    fi
 }
 
 prepare_app () {
