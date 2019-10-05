@@ -1,5 +1,5 @@
-RiotKit's docker container for Django Wiki
-==========================================
+Django Wiki production-ready docker container
+=============================================
 
 [![Docker Repository on Quay](https://quay.io/repository/riotkit/django-wiki/status "Docker Repository on Quay")](https://quay.io/repository/riotkit/django-wiki)
 [![Build Status](https://img.shields.io/travis/riotkit-org/docker-django-wiki/master.svg)](https://travis-ci.org/riotkit-org/docker-django-wiki)
