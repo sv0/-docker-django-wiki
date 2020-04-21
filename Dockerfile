@@ -69,7 +69,7 @@ RUN apk --update add python3 py3-pip bash py3-pillow make shadow sudo libpq curl
     && ln -s /usr/bin/python3 /usr/bin/python
 
 # Install RiotKit utils
-ENV RIOTKIT_UTILS_VERSION="master"
+ENV RIOTKIT_UTILS_VERSION="2.2.0"
 RUN curl "https://raw.githubusercontent.com/riotkit-org/ci-utils/${RIOTKIT_UTILS_VERSION}/ci-integration/any.sh" -s | bash
 
 # PostgreSQL support
