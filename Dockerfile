@@ -1,6 +1,6 @@
 ARG VERSION="0.4.5"
 
-FROM alpine:3.10
+FROM alpine:3.11
 LABEL maintainer "Carlo Mandelli"
 LABEL maintainer RiotKit <riotkit@riseup.net>
 
@@ -70,7 +70,7 @@ RUN apk --update add python3 py3-pip bash py3-pillow make shadow sudo libpq curl
 
 # Install RiotKit utils
 ENV RIOTKIT_UTILS_VERSION="2.2.0"
-RUN curl "https://raw.githubusercontent.com/riotkit-org/ci-utils/${RIOTKIT_UTILS_VERSION}/ci-integration/any.sh" -s | bash
+RUN curl "https://raw.githubusercontent.com/riotkit-org/ci-utils/v${RIOTKIT_UTILS_VERSION}/ci-integration/any.sh" -s | bash
 
 # PostgreSQL support
 RUN apk add --update --virtual .build-deps gcc musl-dev python3-dev postgresql-dev \
