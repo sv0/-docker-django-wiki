@@ -72,7 +72,7 @@ RUN apk --update add python3 py3-pip bash py3-pillow make shadow sudo libpq curl
 ENV RIOTKIT_UTILS_VERSION="2.2.0"
 RUN curl "https://raw.githubusercontent.com/riotkit-org/ci-utils/v${RIOTKIT_UTILS_VERSION}/ci-integration/any.sh" -s | bash
 
-# PostgreSQL support
+# PostgreSQL support 
 RUN apk add --update --virtual .build-deps gcc musl-dev python3-dev postgresql-dev \
     && rm -rf /var/cache/apk/* \
     && pip3 --no-cache-dir install psycopg2 \
