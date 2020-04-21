@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source /etc/profile
 set -e
 
 create_user () {
@@ -38,6 +39,21 @@ prepare_app () {
     sudo -E -u django bash -c "cd /project && ./manage.py migrate"
 }
 
+wait_for_database () {
+    if [[ "${DB_TYPE}" == "postgresql" ]]; then
+        echo " >> Waiting for PostgreSQL to be up"
+        db_type="postgres"
+    elif [[ "${DB_TYPE}" == "mysql" ]]; then
+        echo " >> Waiting for MySQL to be up"
+        db_type="mysql"
+    else
+        echo " >> Unsupported database type, not waiting for"
+        return 0
+    fi
+
+    wait-for-db-to-be-ready --type "${db_type}" --host "${DB_HOST}" --port "${DB_PORT}" --timeout "${DB_WAIT_TIMEOUT}"
+}
+
 echo "# ==================================================================================="
 echo "#   RiotKit's Django Wiki container"
 echo "#   Created by independent, autonomous libertarian tech collective"
@@ -49,6 +65,7 @@ echo "# ========================================================================
 cd /project || exit 1
 
 # prepare the application, set administrator account
+wait_for_database
 prepare_permissions
 prepare_app
 create_user "$ADMIN_USER" "$ADMIN_PASSWORD" "$ADMIN_EMAIL"

@@ -2,7 +2,7 @@ ARG VERSION="0.4.5"
 
 FROM alpine:3.10
 LABEL maintainer "Carlo Mandelli"
-LABEL maintainer RiotKit <riotkit_org@riseup.net>
+LABEL maintainer RiotKit <riotkit@riseup.net>
 
 ARG VERSION
 
@@ -37,6 +37,8 @@ ENV ADMIN_USER=riotkit \
     DB_PORT=None \
     # Database charset
     DB_CHARSET=None \
+    # How long to wait for database connection (in seconds)
+    DB_WAIT_TIMEOUT=300 \
     # Database collation (MySQL only)
     DB_COLLATION=None \
     DB_ORA_DATAFILE=None \
@@ -58,14 +60,17 @@ ENV ADMIN_USER=riotkit \
     # Default group of a user that runs the project (gid)
     DJANGO_GROUP_ID=1000
 
-
 # Base
-RUN apk --update add python3 bash py3-pillow make shadow sudo libpq \
+RUN apk --update add python3 py3-pip bash py3-pillow make shadow sudo libpq curl bash postgresql-client \
     && rm -rf /var/cache/apk/* \
     && ([[ "$VERSION" == "master" ]] || pip3 --no-cache-dir install wiki==${VERSION}) \
     && ([[ "$VERSION" != "master" ]] || pip3 --no-cache-dir install --pre wiki) \
     && pip3 --no-cache-dir install gunicorn \
     && ln -s /usr/bin/python3 /usr/bin/python
+
+# Install RiotKit utils
+ENV RIOTKIT_UTILS_VERSION="master"
+RUN curl "https://raw.githubusercontent.com/riotkit-org/ci-utils/${RIOTKIT_UTILS_VERSION}/ci-integration/any.sh" -s | bash
 
 # PostgreSQL support
 RUN apk add --update --virtual .build-deps gcc musl-dev python3-dev postgresql-dev \

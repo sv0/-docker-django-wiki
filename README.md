@@ -1,5 +1,5 @@
-Django Wiki production-ready docker container
-=============================================
+RiotKit's docker container for Django Wiki
+==========================================
 
 [![Docker Repository on Quay](https://quay.io/repository/riotkit/django-wiki/status "Docker Repository on Quay")](https://quay.io/repository/riotkit/django-wiki)
 [![Build Status](https://img.shields.io/travis/riotkit-org/docker-django-wiki/master.svg)](https://travis-ci.org/riotkit-org/docker-django-wiki)
@@ -67,6 +67,9 @@ List of all environment variables that could be used.
 # Database charset
 - DB_CHARSET # (default: None)
 
+# How long to wait for database connection (in seconds)
+- DB_WAIT_TIMEOUT # (default: 300)
+
 # Database collation (MySQL only)
 - DB_COLLATION # (default: None)
 
@@ -105,6 +108,9 @@ List of all environment variables that could be used.
 
 # Default group of a user that runs the project (gid)
 - DJANGO_GROUP_ID # (default: 1000)
+
+
+- RIOTKIT_UTILS_VERSION # (default: "master")
 
 
 ```
