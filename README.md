@@ -7,8 +7,10 @@ RiotKit's docker container for Django Wiki
 ###  Running
 
 ```bash
-sudo docker run --name djangowiki_test --rm quay.io/riotkit/django-wiki:0.4.5
+sudo docker run --name djangowiki_test --rm quay.io/riotkit/django-wiki:0.5
 ```
+
+Check the list of available tags: https://quay.io/repository/riotkit/django-wiki?tag=latest&tab=tags
 
 Configuration reference
 -----------------------
