@@ -70,4 +70,4 @@ prepare_permissions
 prepare_app
 create_user "$ADMIN_USER" "$ADMIN_PASSWORD" "$ADMIN_EMAIL"
 
-exec sudo -E -u django bash -c "cd /project && gunicorn -b 0.0.0.0:8000 wikiproject.wsgi"
+exec sudo -E -u django bash -c "cd /project && gunicorn -b 0.0.0.0:8000 wikiproject.wsgi ${GUNICORN_OPTS}"

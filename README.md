@@ -7,10 +7,8 @@ RiotKit's docker container for Django Wiki
 ###  Running
 
 ```bash
-sudo docker run --name djangowiki_test --rm quay.io/riotkit/django-wiki:0.5
+sudo docker run --name djangowiki_test --rm quay.io/riotkit/django-wiki:0.4.5
 ```
-
-Check the list of available tags: https://quay.io/repository/riotkit/django-wiki?tag=latest&tab=tags
 
 Configuration reference
 -----------------------
@@ -111,8 +109,11 @@ List of all environment variables that could be used.
 # Default group of a user that runs the project (gid)
 - DJANGO_GROUP_ID # (default: 1000)
 
+# Optional parameters to the GUNICORN eg. --reload for development mode (to reload when code changes on the fly)
+- GUNICORN_OPTS # (default: "")
 
-- RIOTKIT_UTILS_VERSION # (default: "master")
+
+- RIOTKIT_UTILS_VERSION # (default: "2.2.0")
 
 
 ```

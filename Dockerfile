@@ -58,7 +58,9 @@ ENV ADMIN_USER=riotkit \
     # Default user who runs the project (id)
     DJANGO_USER_ID=1000 \
     # Default group of a user that runs the project (gid)
-    DJANGO_GROUP_ID=1000
+    DJANGO_GROUP_ID=1000 \
+    # Optional parameters to the GUNICORN eg. --reload for development mode (to reload when code changes on the fly)
+    GUNICORN_OPTS=""
 
 # Base
 RUN apk --update add python3 py3-pip bash py3-pillow make shadow sudo libpq curl bash postgresql-client \
