@@ -1,37 +1,29 @@
-from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls.static import static
+from django.urls import include, path
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http.response import HttpResponse
-from django.views.static import serve as static_serve
 
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^admin/', include((admin.site.urls[0], admin.site.urls[1]))),
-    url(r'^robots.txt', lambda _: HttpResponse('User-agent: *\nDisallow: /')),
+    path('admin/', admin.site.urls),
+    path('robots.txt', lambda _: HttpResponse('User-agent: *\nDisallow: /')),
+    path('notify/', include('django_nyt.urls')),
+    path('', include('wiki.urls'))
 ]
 
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
 
-urlpatterns += [
-    url(
-        r'^static/wiki/markitup/sets/frontend/style.css/images/(?P<path>.*)$',
-        static_serve,
-        {'document_root': settings.STATIC_ROOT + '/wiki/markitup/sets/frontend/images'}
-    ),
-    url(r'^theme/(?P<path>.*)$', static_serve, {'document_root': settings.THEME_ROOT}),
-    url(r'^static/(?P<path>.*)$', static_serve, {'document_root': settings.STATIC_ROOT}),
-    url(r'^media/(?P<path>.*)$', static_serve, {'document_root': settings.MEDIA_ROOT}),
-]
-
-urlpatterns += [
-    url(r'^notify/', include('django_nyt.urls')),
-    url(r'', include('wiki.urls'))
-]
+    urlpatterns.extend(
+        static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    )
+    urlpatterns.extend(
+        static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    )
 
 handler500 = 'wikiproject.views.server_error'
 handler404 = 'wikiproject.views.page_not_found'
