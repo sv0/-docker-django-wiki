@@ -37,25 +37,22 @@ def get_env(var: str, default):
     return os.getenv(var, default)
 
 
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 settings_dir = os.path.abspath(os.path.dirname(__file__))
-generate_secret_key(os.path.join(PROJECT_DIR, 'settings/secret_key/', '__init__.py'))
 sys.path.append(settings_dir)
 sys.path.append(settings_dir + '/../../')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-try:
-    from .secret_key import SECRET_KEY
-except ImportError:
-    from .secret_key import SECRET_KEY
+SECRET_KEY = 'get_random_string(50)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_bool_var('DEBUG', False)
+DEBUG = True
 
 print(' >> Debug is %s' % str(DEBUG))
 
@@ -128,7 +125,9 @@ LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
 DB_TYPE = os.getenv('DB_TYPE', 'sqlite3')
 
 if DB_TYPE == 'sqlite3':
-    DB_NAME = os.path.join(PROJECT_DIR, 'db', os.getenv('DB_NAME', 'db.sqlite3'))
+    DB_NAME = os.path.join(
+        PROJECT_DIR, 'db', os.getenv('DB_NAME', 'db.sqlite3')
+    )
 else:
     DB_NAME = os.getenv('DB_NAME', 'riotkit_django_wiki')
 
@@ -155,8 +154,8 @@ DATABASES = {
 if get_bool_var('USE_CACHE', False):
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.' + get_env('CACHE_TYPE', 'filebased.FileBasedCache'),
-            'LOCATION': get_env('CACHE_LOCATION', '/var/tmp/django_cache'),
+            'BACKEND': 'django.core.cache.backends.' + get_env('CACHE_TYPE', 'filebased.FileBasedCache'),  # noqa
+            'LOCATION': get_env('CACHE_LOCATION', '/tmp/django_cache'),
             'KEY_PREFIX': get_env('CACHE_KEY_PREFIX', ''),
             'TIMEOUT': int(get_env('CACHE_TIMEOUT', 300))
         }
@@ -168,16 +167,16 @@ if get_bool_var('USE_CACHE', False):
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',  # noqa
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',  # noqa
     },
 ]
 
